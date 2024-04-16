@@ -1,3 +1,4 @@
+# Informazioni sul progetto
 - 📅 **Calendario**
 	- 14/04 - Deadline compilazione form
 	- 15/04 - Assegnazione dei progetti
@@ -36,20 +37,6 @@
 			- *In particolare un metodo superfisionato*
 		- Fare un esempio di clustering con i dati a disposizione
 			- *Funzioni di libreria già pronte per fare questa cosa*
-- 📊 **Dataset**
-  > È utile andare a visitare tutti i link proposti nelle slides  
-Scegliere il dataset in base all'obiettivo analitico, meglio scegliere i dataset dai quali ci vengono subito in mente possibili obiettivi  
-	- [Wordle Twitter Data](https://www.kaggle.com/datasets/vora1011/wordletweets)
-	- [Superstore dataset](https://www.kaggle.com/datasets/vivek468/superstore-dataset-final)
-		- profitti e vendita di un supermercato
-	- [Ted talks](https://www.kaggle.com/datasets/ashishjangra27/ted-talks)
-		- popolarità dei vari ted talks
-	- [9000+ Movies Dataset](https://www.kaggle.com/datasets/disham993/9000-movies-dataset)
-		- il più simile a quello di training
-	- [Google Play Store Apps](https://www.kaggle.com/datasets/lava18/google-play-store-apps)
-	- [Goodreads books](https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks)
-	- [Video Game Sales](https://www.kaggle.com/datasets/rishidamarla/video-game-sales)
-	- [160k Spotify songs from 1921 to 2020](https://www.kaggle.com/datasets/fcpercival/160k-spotify-songs-sorted?select=data.csv)
 - 🤌🏼 **Cosa consegnare?**
 	- Un notebook python
 		- Deve essere ordinato e ben commentato
@@ -59,3 +46,51 @@ Scegliere il dataset in base all'obiettivo analitico, meglio scegliere i dataset
 		- Deve mettere bene insieme celle di testo e figure
 	- Presentazione breve (solo se si vuole fare lo scritto "ridotto")
 		- ~ 1 slide per ogni passo
+
+# 📊 **[Dataset - Wordle Twitter Data](https://www.kaggle.com/datasets/vora1011/wordletweets)**
+Il dataset è da scaricare a mano perché troppo grande
+Domande:
+- qual è la media dei tentativi degli utenti per vincere?
+- da quale piattaforma venga eseguite più partire (Android, Iphone, Web App)?
+- gli utenti che condividono tanti tweet tendono a vincere o a perdere? 
+- in quale paese si gioca di più?
+- in base ai tweet se una certa parola del giorno era più facile o difficile per gli utenti da trovare (ha richiesto più o meno tentativi)?
+- predizione: il prossimo tweet sarà di vincita o perdita?
+Nota. La colonna Location va molto pulita
+Contro: Una sola persona ci ha fatto una analisi sopra.
+
+- **Step 1 - Importazione e Pulizia del dato**
+  - Importare il dataset
+  - Creare la colonna n. attempts estraendola dal testo
+    - Bisogna contare tutte le volte in cui ci sono 5 quadratini di fila
+  - Creare la colonna che indica se ci è stata una vittoria
+    - basta controllare se ci sono 5 quadratini verdi consecutivi
+    - Si può utilizzare la funzione `split` delle stringhe python"
+  - Pulizia delle colonne
+    - Eliminare tutte le righe che non hanno le emoji dei quadratini
+      - Togliamo sia solo testo che link
+  - Possiamo droppare lo username tanto abbiamo lo user id
+  - Q: Ha senso eliminare gli elementi con il testo troncato?
+  - Q: Ha senso tenere la colonna location? O è così sporca che conviene dropparla?
+- **Step 2 - Visualizzazione**
+  - Visualizzazione
+    - Qual'è stata la parola più indovinata
+    - Quali sono le 10 parole più indovinate
+    - Line plot del n. di tweet e dei successi in base al wordle id
+      - I giocatori sono migliorati nel tempo?
+      - Possiamo costruirci su un modello predittivo?
+    - I 10 account con più tweet o con più vittorie
+    - Grafici a torta dei client più utilizzatin
+  - Possibilità per OLAP
+    - Attempts
+      - Già quantizzati (da 1 a 6)
+    - Difficulty
+      - VERY EASY - >75% dei tweet di quel wordle id erano vincenti
+      - EASY - > 50% ...
+      - Hard - < 50% ...
+      - VERY HARD < 25% ...
+    - Popularity
+      - Quanti tweet ci sono stati inerenti al tweet
+      - Prendiamo il massimo numero di tweet e il minimo inerenti ai vari wordle ID
+      - Utilizzare il range inter quartile per la quantizzazione
+    - I wordle ID raggrupparli in recent, very recent etc...
