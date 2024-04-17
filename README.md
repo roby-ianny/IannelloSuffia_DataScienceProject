@@ -53,8 +53,9 @@ Domande:
 - qual è la media dei tentativi degli utenti per vincere?
 - da quale piattaforma venga eseguite più partire (Android, Iphone, Web App)?
 - gli utenti che condividono tanti tweet tendono a vincere o a perdere? 
-- in quale paese si gioca di più?
+- in quale paese si gioca di più? X
 - in base ai tweet se una certa parola del giorno era più facile o difficile per gli utenti da trovare (ha richiesto più o meno tentativi)?
+- Test statistico, Android vs iPhone
 - predizione: il prossimo tweet sarà di vincita o perdita?
 Nota. La colonna Location va molto pulita
 Contro: Una sola persona ci ha fatto una analisi sopra.
@@ -70,8 +71,13 @@ Contro: Una sola persona ci ha fatto una analisi sopra.
     - Eliminare tutte le righe che non hanno le emoji dei quadratini
       - Togliamo sia solo testo che link
   - Possiamo droppare lo username tanto abbiamo lo user id
-  - Q: Ha senso eliminare gli elementi con il testo troncato?
+  - Q: Ha senso eliminare gli elementi con il testo troncato? 
+    - A: Sì, ma dovrebbe farlo in automatico con il confronto tra le emoji e il numero di tentativi estratto dal testo
   - Q: Ha senso tenere la colonna location? O è così sporca che conviene dropparla?
+    - A: Conviene dropparla e spostare al massimo l'analisi ai dispositivi
+  - Q: Ha senso confrontare il campo text e attempts per vedere se i dati sono coerenti oppure non è necessario?
+    - Si per una maggiore robustezza dei dati
+- **NB:** Verificare l'unicità
 - **Step 2 - Visualizzazione**
   - Visualizzazione
     - Qual'è stata la parola più indovinata
@@ -89,8 +95,12 @@ Contro: Una sola persona ci ha fatto una analisi sopra.
       - EASY - > 50% ...
       - Hard - < 50% ...
       - VERY HARD < 25% ...
+      - Vediamo se basare la difficulty sul # di tentativi e/o sul # di successi
     - Popularity
       - Quanti tweet ci sono stati inerenti al tweet
       - Prendiamo il massimo numero di tweet e il minimo inerenti ai vari wordle ID
       - Utilizzare il range inter quartile per la quantizzazione
     - I wordle ID raggrupparli in recent, very recent etc...
+- **Step 4 - Metodi Predittivi/Clustering**
+  - Se non ha senso usare i metodi predittivi allora specifichiamo nel notebook che non avrebbe senso e il motivo e si può passare al clustering  
+    - Nel nostro caso è meglio fare clustering in base a un parametro "difficoltà" ed evitare di fare predizioni
