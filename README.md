@@ -77,7 +77,7 @@ Contro: Una sola persona ci ha fatto una analisi sopra.
     - A: Conviene dropparla e spostare al massimo l'analisi ai dispositivi
   - Q: Ha senso confrontare il campo text e attempts per vedere se i dati sono coerenti oppure non è necessario?
     - Si per una maggiore robustezza dei dati
-- **NB:** Verificare l'unicità
+- **NB:** Verificare l'unicità dei tweet
 - **Step 2 - Visualizzazione**
   - Visualizzazione
     - Qual'è stata la parola più indovinata
