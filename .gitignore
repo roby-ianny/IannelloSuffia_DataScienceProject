@@ -2,3 +2,5 @@
 WordleMegaData.csv
 # ignore the readme preview file
 README.html
+# ignore checkpoints
+./ipnyb_checkpoints/ 
