@@ -1,0 +1,12 @@
+- T-Test è corretto? [A]
+    - Ok ma se vogliamo sarebbe meglio fare un confronto con l'intera popolazione
+    - Secondo T-Test (da riguardare)ù
+- Regressione lineare [R]
+    - effettivamente i dati hanno una forte correlazione, dovremmo trovare un alternativa
+    - non per forza l'input deve essere unidimensionale
+- Nella regressione logistica le percentuali sono identiche, perchè? [R]
+    - Perché c'è uno sbilanciamento (troppo vittorie rispetto alle perdite)
+- Clustering ok? [Both]
+    - No, deve essere fatto in modo che ogni riga sia un punto
+- Quando consegnare le slides? [A]
+    - Le slides vanno consegnate quando si discute il progetto
