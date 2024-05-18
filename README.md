@@ -1,105 +1,18 @@
-# Informazioni sul progetto
-- 📅 **Calendario**
-	- 14/04 - Deadline compilazione form
-	- 15/04 - Assegnazione dei progetti
-	- Dal 16/04 al 14/05 - Si lavora al progetto
-	- 15/05 - Deadline
-	- Dal 21/05 al 29/05 - Discussione del progetto
-- 🗒️ **Info utili**
-	- Il progetto costituirà il 50% dello scritto
-	- Se si discute il progetto  si accede a una versione ridotta dello scritto
-		- Si scelgono 3 domande al posto delle 5 totali presenti sullo scritto
-	- Se non si rispettano le tempistiche
-		- Si fa il progetto e lo scritto sarà la versione completa
-		- Progetto 30% - Scritto 70% del voto
-	- Una volta discusso il progetto il voto del progetto rimane anche se si fallisce lo scritto
-	- In caso di "emergenza" si possono mandare delle mail
-- ⚙️ **Struttura del progetto**
-	- Scelta del dataset
-	- Si replica quanto imparato a lezioni+laboratori
-		- *Si replica la pipeline del data scientist*
-		- *In genere possiamo "riciclare" il codice visto nei laboratori*
-	- Il progetto si svolge in 5 fasi:
-		- Definizione di un obiettivo analitico
-			- *Ovvero trovare le domande alle quali i nostri dati possono rispondere*
-			- *Filo conduttore del progetto*
-			- Due approcci
-				- Una sola domanda a cui si arriva a una conclusione al termine dell'analisi
-				- Una serie di domande "più piccole" a cui rispondere durante le varie fasi del progetto
-		- Pulizia dei dati
-			- *Laboratorio 1*
-		- Visualizzazione (usare OLAP e proporre almeno due visualizzazioni diverse)
-			- *Laboratorio 2*
-		- Almeno un test statistico
-			- *Laboratorio 3*
-		- Utilizzare un metodo predittivo visto a lezione
-			- *Laboratorio 4*
-			- *In particolare un metodo superfisionato*
-		- Fare un esempio di clustering con i dati a disposizione
-			- *Funzioni di libreria già pronte per fare questa cosa*
-- 🤌🏼 **Cosa consegnare?**
-	- Un notebook python
-		- Deve essere ordinato e ben commentato
-			- Ordinato
-			- Ben Commentato
-				- Esplicitare il motivo per il quale si fa qualcosa
-		- Deve mettere bene insieme celle di testo e figure
-	- Presentazione breve (solo se si vuole fare lo scritto "ridotto")
-		- ~ 1 slide per ogni passo
+# Analisi del dataset Wordle Tweets
 
-# 📊 **[Dataset - Wordle Twitter Data](https://www.kaggle.com/datasets/vora1011/wordletweets)**
-Il dataset è da scaricare a mano perché troppo grande
-Domande:
-- qual è la media dei tentativi degli utenti per vincere?
-- da quale piattaforma venga eseguite più partire (Android, Iphone, Web App)?
-- gli utenti che condividono tanti tweet tendono a vincere o a perdere? 
-- in quale paese si gioca di più? X
-- in base ai tweet se una certa parola del giorno era più facile o difficile per gli utenti da trovare (ha richiesto più o meno tentativi)?
-- Test statistico, Android vs iPhone
-- predizione: il prossimo tweet sarà di vincita o perdita?
-Nota. La colonna Location va molto pulita
-Contro: Una sola persona ci ha fatto una analisi sopra.
+**⚠️Note Importanti:**
+- Il DataSet è di dimensioni troppo grandi sia per GitHub che per la consegna di aulaweb. Lo si può scaricare manualmente da questo [link](https://www.kaggle.com/datasets/vora1011/wordletweets/data)
+- Questo notebook è stato realizzato utilizzando jupyter in locale, e potrebbe **non funzionare** correttametne con Google Colab
 
-- **Step 1 - Importazione e Pulizia del dato**
-  - Importare il dataset
-  - Creare la colonna n. attempts estraendola dal testo
-    - Bisogna contare tutte le volte in cui ci sono 5 quadratini di fila
-  - Creare la colonna che indica se ci è stata una vittoria
-    - basta controllare se ci sono 5 quadratini verdi consecutivi
-    - Si può utilizzare la funzione `split` delle stringhe python"
-  - Pulizia delle colonne
-    - Eliminare tutte le righe che non hanno le emoji dei quadratini
-      - Togliamo sia solo testo che link
-  - Possiamo droppare lo username tanto abbiamo lo user id
-  - Q: Ha senso eliminare gli elementi con il testo troncato? 
-    - A: Sì, ma dovrebbe farlo in automatico con il confronto tra le emoji e il numero di tentativi estratto dal testo
-  - Q: Ha senso tenere la colonna location? O è così sporca che conviene dropparla?
-    - A: Conviene dropparla e spostare al massimo l'analisi ai dispositivi
-  - Q: Ha senso confrontare il campo text e attempts per vedere se i dati sono coerenti oppure non è necessario?
-    - Si per una maggiore robustezza dei dati
-- **NB:** Verificare l'unicità dei tweet
-- **Step 2 - Visualizzazione**
-  - Visualizzazione
-    - Qual'è stata la parola più indovinata
-    - Quali sono le 10 parole più indovinate
-    - Line plot del n. di tweet e dei successi in base al wordle id
-      - I giocatori sono migliorati nel tempo?
-      - Possiamo costruirci su un modello predittivo?
-    - I 10 account con più tweet o con più vittorie
-    - Grafici a torta dei client più utilizzatin
-  - Possibilità per OLAP
-    - Attempts + Difficulty
-      - Già quantizzati (da 1 a 6)
-      - VERY EASY - >75% dei tweet di quel wordle id erano vincenti
-      - EASY - > 50% ...
-      - Hard - < 50% ...
-      - VERY HARD < 25% ...
-      - Vediamo se basare la difficulty sul # di tentativi e/o sul # di successi
-    - Popularity
-      - Quanti tweet ci sono stati inerenti al tweet
-      - Prendiamo il massimo numero di tweet e il minimo inerenti ai vari wordle ID
-      - Utilizzare il range inter quartile per la quantizzazione
-    - I wordle ID raggrupparli in recent, very recent etc...
-- **Step 4 - Metodi Predittivi/Clustering**
-  - Se non ha senso usare i metodi predittivi allora specifichiamo nel notebook che non avrebbe senso e il motivo e si può passare al clustering  
-    - Nel nostro caso è meglio fare clustering in base a un parametro "difficoltà" ed evitare di fare predizioni
+**🎯Obiettivo Analitico:** Indagare l'esistenza di una relazione tra l'attività di un utente, come il numero di tentativi fatti o la frequenza di gioco, e la sua probabilità di vincita a Wordle.
+
+**⚙️Operazioni Svolte**
+1. Pulizia e integrazione dei dati
+2. Visualizzazione dei dati
+3. Applicazione di test statistici
+4. Realizzazione di Modelli Predittivi
+5. Clustering 
+
+**👨‍💻 Chi ha realizzato questo progetto?**
+- Iannello Roberto Pio - Università degli Studi di Genova - matr. 5201538
+- Suffia Azzurra - Università degli Studi di Genova - matr. 5341007
